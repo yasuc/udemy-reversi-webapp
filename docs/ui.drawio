@@ -1,0 +1,37 @@
+<mxfile host="65bd71144e">
+    <diagram id="k2k1C-fO8mHyiqb89Gdn" name="ページ1">
+        <mxGraphModel dx="627" dy="639" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="20" width="350" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="リバーシで学ぶアプリケーション設計入門" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="20" width="350" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="対戦する" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="152.5" y="70" width="85" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="過去の対戦結果" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="30" y="120" width="330" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="411.5" y="20" width="350" height="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="リバーシで学ぶアプリケーション設計入門" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="411" y="20" width="351" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="対戦する" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="546.5" y="70" width="85" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="盤面" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="511" y="120" width="156" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="次の黒の番です" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="541.5" y="270" width="90" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
