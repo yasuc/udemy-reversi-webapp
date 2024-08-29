@@ -24,6 +24,7 @@ export class TurnGateway {
       record["end_at"],
     );
   }
+
   async insert(
     conn: mysql.Connection,
     gameId: number,
