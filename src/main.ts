@@ -14,6 +14,13 @@ app.use(express.static("static", { extensions: ["html"] }));
 app.use(express.json());
 app.use(errorHandler);
 
+app.use(gameRouter);
+app.use(turnRouter);
+
+app.listen(PORT, () => {
+  console.log(`Reversi application started: http://localhost:${PORT}`);
+});
+
 function errorHandler(
   err: any,
   _req: express.Request,
@@ -25,20 +32,3 @@ function errorHandler(
     message: "Unexpected error occurred",
   });
 }
-
-app.use(gameRouter);
-app.use(turnRouter);
-
-app.listen(PORT, () => {
-  console.log(`Reversi application started: http://localhost:${PORT}`);
-});
-
-app.get("/api/hello", async (req, res) => {
-  res.json({
-    message: "Hello Express!!!",
-  });
-});
-
-app.get("/api/error", async (req, res) => {
-  throw new Error("Error endpoint");
-});
