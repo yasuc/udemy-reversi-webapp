@@ -1,4 +1,3 @@
-import express from "express";
 import { GameGateway } from "../dataaccess/gameGateway";
 import { SquareGateway } from "../dataaccess/squareGateway";
 import { TurnGateway } from "../dataaccess/turnGateway";

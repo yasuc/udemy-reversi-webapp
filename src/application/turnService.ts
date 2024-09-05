@@ -10,8 +10,35 @@ const turnGateway = new TurnGateway();
 const squareGateway = new SquareGateway();
 const moveGateway = new MoveGateway();
 
+class FindLatestGameTurnByTrunCountOutput {
+  constructor(
+    private _turnCount: number,
+    private _board: number[][],
+    private _nextDisc: number | undefined,
+    private _winnerDisc: number | undefined,
+  ) {}
+
+  get turnCount() {
+    return this._turnCount;
+  }
+
+  get board() {
+    return this._board;
+  }
+
+  get nextDisc() {
+    return this._nextDisc;
+  }
+
+  get winnerDisc() {
+    return this._winnerDisc;
+  }
+}
+
 export class TurnService {
-  async findLatestGameTurnByTrunCount(turnCount: number) {
+  async findLatestGameTurnByTrunCount(
+    turnCount: number,
+  ): Promise<FindLatestGameTurnByTrunCountOutput> {
     const conn = await connectMySQL();
     try {
       const gameRecord = await gameGateway.findLatest(conn);
@@ -39,13 +66,12 @@ export class TurnService {
         board[s.y][s.x] = s.disc;
       });
 
-      return {
+      return new FindLatestGameTurnByTrunCountOutput(
         turnCount,
         board,
-        nextDisc: turnRecord.nextDisc,
-        // TODO 決着がついている場合、game_results テーブルから取得する
-        winnerDisc: null,
-      };
+        turnRecord.nextDisc,
+        undefined,
+      );
     } finally {
       await conn.end();
     }
