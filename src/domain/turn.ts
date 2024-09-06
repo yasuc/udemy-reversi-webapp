@@ -11,7 +11,7 @@ export class Turn {
     private _move: Move | undefined,
     private _board: Board,
     private _endAt: Date,
-  ) {}
+  ) { }
 
   placeNext(disc: Disc, point: Point): Turn {
     // 打とうとした石が、次の石ではない場合、置くことはできない
@@ -54,5 +54,9 @@ export class Turn {
 
   get board() {
     return this._board;
+  }
+
+  get move() {
+    return this._move;
   }
 }
