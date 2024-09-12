@@ -1,4 +1,4 @@
-import { Board } from "./board";
+import { Board, initialBoard } from "./board";
 import { Disc } from "./disc";
 import { Move } from "./move";
 import { Point } from "./point";
@@ -11,7 +11,7 @@ export class Turn {
     private _move: Move | undefined,
     private _board: Board,
     private _endAt: Date,
-  ) { }
+  ) {}
 
   placeNext(disc: Disc, point: Point): Turn {
     // 打とうとした石が、次の石ではない場合、置くことはできない
@@ -59,4 +59,8 @@ export class Turn {
   get move() {
     return this._move;
   }
+}
+
+export function firstTurn(gameId: number, endAt: Date): Turn {
+  return new Turn(gameId, 0, Disc.Dark, undefined, initialBoard, endAt);
 }
