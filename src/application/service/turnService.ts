@@ -1,13 +1,14 @@
-import { connectMySQL } from "../infrastructure/connection";
-import { GameRepository } from "../domain/model/game/gameRepository";
-import { toDisc } from "../domain/model/turn/disc";
-import { Point } from "../domain/model/turn/point";
-import { TurnRepository } from "../domain/model/turn/turnRepository";
+import { connectMySQL } from "../../infrastructure/connection";
+import { GameRepository } from "../../domain/model/game/gameRepository";
+import { Disc, toDisc } from "../../domain/model/turn/disc";
+import { Point } from "../../domain/model/turn/point";
+import { TurnRepository } from "../../domain/model/turn/turnRepository";
+import { ApplicationError } from "../error/applicationError";
 
 const gameRepository = new GameRepository();
 const turnRepository = new TurnRepository();
 
-class FindLatestGameTurnByTrunCountOutput {
+class FindLatestGameTurnByTurnCountOutput {
   constructor(
     private _turnCount: number,
     private _board: number[][],
@@ -33,15 +34,18 @@ class FindLatestGameTurnByTrunCountOutput {
 }
 
 export class TurnService {
-  async findLatestGameTurnByTrunCount(
+  async findLatestGameTurnByTurnCount(
     turnCount: number,
-  ): Promise<FindLatestGameTurnByTrunCountOutput> {
+  ): Promise<FindLatestGameTurnByTurnCountOutput> {
     const conn = await connectMySQL();
     try {
       const game = await gameRepository.findLatest(conn);
 
       if (!game) {
-        throw new Error("Latest game not found");
+        throw new ApplicationError(
+          "LatestGameNotFound",
+          "Latest game not found",
+        );
       }
 
       if (!game.id) {
@@ -54,7 +58,7 @@ export class TurnService {
         turnCount,
       );
 
-      return new FindLatestGameTurnByTrunCountOutput(
+      return new FindLatestGameTurnByTurnCountOutput(
         turnCount,
         turn.board.discs,
         turn.nextDisc,
@@ -65,7 +69,7 @@ export class TurnService {
     }
   }
 
-  async registerTurn(turnCount: number, disc: number, x: number, y: number) {
+  async registerTurn(turnCount: number, disc: Disc, point: Point) {
     const conn = await connectMySQL();
     try {
       await conn.beginTransaction();
@@ -73,7 +77,10 @@ export class TurnService {
       const game = await gameRepository.findLatest(conn);
 
       if (!game) {
-        throw new Error("Latest game not found");
+        throw new ApplicationError(
+          "LatestGameNotFound",
+          "Latest game not found",
+        );
       }
 
       if (!game.id) {
@@ -88,7 +95,7 @@ export class TurnService {
       );
 
       // 石を置く
-      const newTurn = previousTurn.placeNext(toDisc(disc), new Point(x, y));
+      const newTurn = previousTurn.placeNext(disc, point);
 
       // ターンを保存する
       await turnRepository.save(conn, newTurn);

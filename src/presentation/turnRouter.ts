@@ -1,5 +1,7 @@
 import express from "express";
-import { TurnService } from "../application/turnService";
+import { TurnService } from "../application/service/turnService";
+import { toDisc } from "../domain/model/turn/disc";
+import { Point } from "../domain/model/turn/point";
 
 export const turnRouter = express.Router();
 
@@ -17,7 +19,7 @@ turnRouter.get(
   async (req, res: express.Response<TurnGetResponseBody>) => {
     const turnCount = parseInt(req.params.turnCount);
 
-    const output = await turnService.findLatestGameTurnByTrunCount(turnCount);
+    const output = await turnService.findLatestGameTurnByTurnCount(turnCount);
 
     const responseBody = {
       turnCount: output.turnCount,
@@ -47,7 +49,7 @@ turnRouter.post(
     const x = req.body.move.x;
     const y = req.body.move.y;
 
-    await turnService.registerTurn(turnCount, disc, x, y);
+    await turnService.registerTurn(turnCount, toDisc(disc), new Point(x, y));
 
     res.status(201).end();
   },
